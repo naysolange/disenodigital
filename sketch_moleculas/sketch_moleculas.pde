@@ -1,21 +1,25 @@
 
 ArrayList<Molecula> moleculas = new ArrayList<Molecula>();
+PImage img;
+
 
 void setup() {
   size(1200,800);
-  background(255);
+  img = loadImage("humo.jpg");
+  img.resize(1200,800);
+  image(img, 0, 0);
+  colorMode(HSB, 360, 100, 100);
   
   // Creo moléculas y las guardo en una lista
-  for(int i=0;i<100;i++) {
-    color colorDeLaMolecula = color(0,random(50,245),57);
-    Molecula molecula = new Molecula(random(1200),random(800),random(10,150),colorDeLaMolecula,2.5);
+  for(int i=0;i<80;i++) {
+    Molecula molecula = new Molecula(random(width),random(height),random(10,150),2.5);
     moleculas.add(molecula);
   }
 }
 
 void draw() {
   frameRate(20);
-  background(255);
+    background(img);
   ArrayList<Molecula> moleculasMuertas = new ArrayList<Molecula>();
   
   // Dibujo las moléculas
@@ -33,8 +37,7 @@ void draw() {
   moleculas.removeAll(moleculasMuertas);
   
   // Creo una nueva molécula 
-  color rgb = color(0,random(50,245),57);
-  Molecula nuevaMolecula = new Molecula(random(1200),random(800),random(10,150),rgb,2.5);
+  Molecula nuevaMolecula = new Molecula(random(width),random(height),random(10,150),2.5);
   moleculas.add(nuevaMolecula);
 }
 
@@ -44,16 +47,14 @@ class Molecula {
   float x;
   float y;
   float diametro;
-  color rgb;
   float velocidad;
   ArrayList<Molecula> particulas; 
   
-  Molecula(float x, float y, float diametro, color rgb, float velocidad) {
+  Molecula(float x, float y, float diametro, float velocidad) {
     this.x = x;
     this.y = y;
     this.diametro = diametro;
     this.particulas = new ArrayList<Molecula>();
-    this.rgb = rgb;
     this.velocidad = velocidad;
   }
   
@@ -61,7 +62,7 @@ class Molecula {
     if(diametro > 0) { //<>//
       diametro -= 1;
       this.moverse();
-      Molecula particula = new Molecula(x+random(-diametro,diametro),y+random(-diametro,diametro),diametro/4,rgb,random(-velocidad,velocidad));
+      Molecula particula = new Molecula(x+random(-diametro,diametro),y+random(-diametro,diametro),diametro/4,random(-velocidad,velocidad));
       particulas.add(particula);
     } 
   }
@@ -74,9 +75,7 @@ class Molecula {
   void dibujarse() {
     // Solo dibujo cuando tiene un diámetro válido
     if(diametro > 0) {
-      noStroke();
-      fill(rgb);
-      circle(x,y,diametro);  
+      this.dibujarCirculo();
       for(Molecula p : particulas) {
         p.desintegrarse();
         p.dibujarse();
@@ -87,5 +86,32 @@ class Molecula {
   boolean estaMuerta() {
     return diametro <= 0;  
   }
+  
+  
+  void dibujarCirculo() {
+    noStroke();
+    float radio = diametro/2;
+    float tono = random(80, 150);
+    float saturacion = 100;
+    float brillo = 100;
+    for(float r = radio; r > 0; --r) {
+      fill(tono, saturacion, brillo);
+      ellipse(x, y, r, r);
+      tono++;
+      saturacion--;
+      brillo--;
+      if(tono == 151) {
+        tono = 80;
+      }
+      if(brillo == 0){
+        brillo = 100;
+      }
+      if(saturacion == 0){
+        saturacion = 100;
+      }
+    }
+  }
+
+
   
 }
