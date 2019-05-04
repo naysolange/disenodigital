@@ -62,7 +62,8 @@ class Molecula {
     if(diametro > 0) { //<>//
       diametro -= 1;
       this.moverse();
-      Molecula particula = new Molecula(x+random(-diametro,diametro),y+random(-diametro,diametro),diametro/4,random(-velocidad,velocidad));
+      float nuevoDiametro = diametro/random(3,6);
+      Molecula particula = new Molecula(x+random(-diametro,diametro),y+random(-diametro,diametro),nuevoDiametro,random(-velocidad,velocidad));
       particulas.add(particula);
     } 
   }
