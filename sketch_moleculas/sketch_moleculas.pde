@@ -11,7 +11,7 @@ void setup() {
   colorMode(HSB, 360, 100, 100);
   
   // Creo moléculas y las guardo en una lista
-  for(int i=0;i<80;i++) {
+  for(int i=0;i<90;i++) {
     Molecula molecula = new Molecula(random(width),random(height),random(10,150),2.5);
     moleculas.add(molecula);
   }
@@ -19,7 +19,7 @@ void setup() {
 
 void draw() {
   frameRate(20);
-    background(img);
+  background(img);
   ArrayList<Molecula> moleculasMuertas = new ArrayList<Molecula>();
   
   // Dibujo las moléculas
@@ -92,7 +92,7 @@ class Molecula {
     noStroke();
     float radio = diametro/2;
     float tono = random(80, 150);
-    float saturacion = 100;
+    float saturacion = 90;
     float brillo = 100;
     for(float r = radio; r > 0; --r) {
       fill(tono, saturacion, brillo);
