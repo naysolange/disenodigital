@@ -63,7 +63,7 @@ class Molecula {
       diametro -= 1;
       this.moverse();
       float nuevoDiametro = diametro/random(3,6);
-      Molecula particula = new Molecula(x+random(-diametro,diametro),y+random(-diametro,diametro),nuevoDiametro,random(-velocidad,velocidad));
+      Molecula particula = new Molecula(x+random(-diametro,diametro),y+random(-diametro,diametro),nuevoDiametro,random(-velocidad,velocidad)); //<>//
       particulas.add(particula);
     } 
   }
@@ -92,7 +92,7 @@ class Molecula {
   void dibujarCirculo() {
     noStroke();
     float radio = diametro/2;
-    float tono = random(80, 150);
+    float tono = random(80, 165);
     float saturacion = 90;
     float brillo = 100;
     for(float r = radio; r > 0; --r) {
