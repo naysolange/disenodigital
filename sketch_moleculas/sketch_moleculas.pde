@@ -1,16 +1,25 @@
 
 ArrayList<Molecula> moleculas = new ArrayList<Molecula>();
 PImage img;
-
+import processing.sound.*;
+SoundFile base;
 
 void setup() {
   size(1200,800);
+  
+  // Carga la imagen de fondo
   img = loadImage("humo.jpg");
   img.resize(1200,800);
   image(img, 0, 0);
+  
+  // Carga el audio base
+  base = new SoundFile(this, "space-synth.wav");
+  base.loop();
+    
+  // Setea el modo de color a HSB
   colorMode(HSB, 360, 100, 100);
   
-  // Creo moléculas y las guardo en una lista
+  // Crea moléculas y las guarda en una lista
   for(int i=0;i<90;i++) {
     Molecula molecula = new Molecula(random(width),random(height),random(10,150),2.5);
     moleculas.add(molecula);
@@ -20,6 +29,7 @@ void setup() {
 void draw() {
   frameRate(20);
   background(img);
+
   ArrayList<Molecula> moleculasMuertas = new ArrayList<Molecula>();
   
   // Dibujo las moléculas
