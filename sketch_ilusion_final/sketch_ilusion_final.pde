@@ -1,20 +1,41 @@
 int lado = 282;
 float separacion = 10;
+color colorFondo;
+color colorLineas;
 
 void setup() {
   size(564,489);
-  background(253,253,150);
+  background(176,224,230);
 }
 
 void draw() {
-  fill(0);
-  textSize(18);
-  text("Ilusión óptica 3D", 10, 30); 
+  
+  if(key == 'c' || key == 'C'){ 
+    colorFondo = color(253,253,150);
+    colorLineas = color(99,11,87);
+
+  } else {
+    colorFondo = color(255);
+    colorLineas = color(0);
+  }
+ 
+  if(mousePressed){
+    background(176,224,230);  
+  } else {
+    new TrianguloCentral(width/2-lado/2,height/2,width/2+lado/2,height/2,width/2,height, separacion, colorFondo, colorLineas).dibujar();
+  }
+  
+  mostrarTitulo();
   new TrianguloLateral(width/2, 0, width/2-lado/2, height/2,  width/2+lado/2, height/2, separacion, colorFondo, colorLineas).dibujar();
   new TrianguloLateral(width/2-lado/2, height/2,  0, height, width/2, height, separacion, colorFondo, colorLineas).dibujar();
   new TrianguloLateral(width/2+lado/2, height/2, width/2, height, width, height, separacion, colorFondo, colorLineas).dibujar();
-  new TrianguloCentral(width/2-lado/2,height/2,width/2+lado/2,height/2,width/2,height, separacion, colorFondo, colorLineas).dibujar();
-  
+
+}
+
+void mostrarTitulo() {
+  fill(0);
+  textSize(18);
+  text("Ilusión óptica 3D", 10, 30); 
 }
 
 abstract class Triangulo {
@@ -52,8 +73,9 @@ class TrianguloCentral extends Triangulo {
   }
   
   void dibujar() {
-    fill(253,253,150);
-   stroke(99,11,87);
+    
+    fill(colorFondo);
+    stroke(colorLineas);
     strokeWeight(1);
  
     for(int i=0; i<15; i++) {
@@ -72,8 +94,8 @@ class TrianguloLateral extends Triangulo {
   void dibujar() {
 
    float grosor = 0.5;
-   fill(253,253,150);
-   stroke(99,11,87);
+   fill(colorFondo);
+   stroke(colorLineas);
    
    for(int i=0; i<15; i++) {
      grosor = grosor + 0.3;
