@@ -7,7 +7,9 @@ void setup() {
 }
 
 void draw() {
-  
+  fill(0);
+  textSize(18);
+  text("Ilusión óptica 3D", 10, 30); 
   new TrianguloLateral(width/2, 0, width/2-lado/2, height/2,  width/2+lado/2, height/2, separacion).dibujar();
   new TrianguloLateral(width/2-lado/2, height/2,  0, height, width/2, height, separacion).dibujar();
   new TrianguloLateral(width/2+lado/2, height/2, width/2, height, width, height, separacion).dibujar();
@@ -46,6 +48,7 @@ class TrianguloCentral extends Triangulo {
   }
   
   void dibujar() {
+    fill(255);
     strokeWeight(1);
  
     for(int i=0; i<15; i++) {
@@ -64,6 +67,7 @@ class TrianguloLateral extends Triangulo {
   void dibujar() {
 
    float grosor = 0.5;
+   fill(255);
    
    for(int i=0; i<15; i++) {
      grosor = grosor + 0.3;
