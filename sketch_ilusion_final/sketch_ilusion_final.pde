@@ -1,23 +1,19 @@
+int lado = 282;
+float separacion = 10;
+
 void setup() {
   size(564,489);
   background(255);
 }
-int lado = 282;
-float separacion = 10;
 
 void draw() {
   
-  Triangulo t1 = new TrianguloLateral(width/2, 0, width/2-lado/2, height/2,  width/2+lado/2, height/2, separacion);
-  t1.dibujar();
-  Triangulo t3 = new TrianguloLateral(width/2-lado/2, height/2,  0, height, width/2, height, separacion);
-  t3.dibujar();
-  Triangulo t4 = new TrianguloLateral(width/2+lado/2, height/2, width/2, height, width, height, separacion);
-  t4.dibujar();
-  Triangulo t2 = new TrianguloCentral(width/2-lado/2,height/2,width/2+lado/2,height/2,width/2,height, separacion);
-  t2.dibujar();
+  new TrianguloLateral(width/2, 0, width/2-lado/2, height/2,  width/2+lado/2, height/2, separacion).dibujar();
+  new TrianguloLateral(width/2-lado/2, height/2,  0, height, width/2, height, separacion).dibujar();
+  new TrianguloLateral(width/2+lado/2, height/2, width/2, height, width, height, separacion).dibujar();
+  new TrianguloCentral(width/2-lado/2,height/2,width/2+lado/2,height/2,width/2,height, separacion).dibujar();
   
 }
-
 
 abstract class Triangulo {
   
@@ -67,7 +63,7 @@ class TrianguloLateral extends Triangulo {
   
   void dibujar() {
 
-   float grosor = 1;
+   float grosor = 0.5;
    
    for(int i=0; i<15; i++) {
      grosor = grosor + 0.3;
